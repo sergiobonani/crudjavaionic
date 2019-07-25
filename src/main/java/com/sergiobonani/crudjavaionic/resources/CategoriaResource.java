@@ -1,10 +1,10 @@
 package com.sergiobonani.crudjavaionic.resources;
 
 import com.sergiobonani.crudjavaionic.domain.Categoria;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.sergiobonani.crudjavaionic.services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -14,15 +14,13 @@ import java.util.List;
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> Listar(){
-		Categoria cat1 = new Categoria(1, "Informática");
-		Categoria cat2 = new Categoria(2, "Escritório");
+	@Autowired
+	private CategoriaService service;
 
-		ArrayList<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id){
+		Categoria categoria = service.buscar(id);
 
-		return lista;
+		return ResponseEntity.ok().body(categoria);
 	}
 }
