@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -19,6 +20,8 @@ public class CategoriaResource {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
+
+
 		Categoria categoria = service.buscar(id);
 
 		return ResponseEntity.ok().body(categoria);
