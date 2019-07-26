@@ -9,43 +9,28 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Produto implements Serializable {
+public class Estado implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Double preco;
 
 	@JsonBackReference
-	@ManyToMany
-	@JoinTable(name = "Produto_Categoria",
-			joinColumns = @JoinColumn(name = "Produto_Id"),
-			inverseJoinColumns = @JoinColumn(name = "Categoria_Id"))
-	private List<Categoria> categorias = new ArrayList<>();
+	@OneToMany(mappedBy = "estado")
+	private List<Cidade> cidades = new ArrayList<>();
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Produto produto = (Produto) o;
-		return Objects.equals(id, produto.id);
+		Estado estado = (Estado) o;
+		return Objects.equals(id, estado.id);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
-	}
-
-	public Produto(){
-
-	}
-
-	public Produto(Integer id, String nome, Double preco) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -64,19 +49,17 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	public Double getPreco() {
-		return preco;
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
 
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
+	public Estado(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
 	}
 }
