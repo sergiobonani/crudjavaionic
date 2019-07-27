@@ -1,5 +1,7 @@
 package com.sergiobonani.crudjavaionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sergiobonani.crudjavaionic.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ public abstract class Pagamento implements Serializable {
 
 	private Integer estadoPagamento;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId

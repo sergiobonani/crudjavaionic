@@ -1,5 +1,7 @@
 package com.sergiobonani.crudjavaionic.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sergiobonani.crudjavaionic.domain.enums.TipoCliente;
 
@@ -18,7 +20,6 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 
-	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 
@@ -34,6 +35,7 @@ public class Cliente implements Serializable {
 		this.pedidos = pedidos;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
