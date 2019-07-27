@@ -57,6 +57,9 @@ public class Estado implements Serializable {
 		this.cidades = cidades;
 	}
 
+	public Estado(){
+
+	}
 	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
