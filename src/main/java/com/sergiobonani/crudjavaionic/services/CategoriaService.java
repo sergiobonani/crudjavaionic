@@ -1,11 +1,15 @@
 package com.sergiobonani.crudjavaionic.services;
 
 import com.sergiobonani.crudjavaionic.domain.Categoria;
+import com.sergiobonani.crudjavaionic.dto.CategoriaDTO;
 import com.sergiobonani.crudjavaionic.exceptions.DataIntegrityException;
 import com.sergiobonani.crudjavaionic.exceptions.ObjectNotFoundException;
 import com.sergiobonani.crudjavaionic.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +32,13 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria categoria){
-		return repository.save(categoria);
+		Categoria newObj = find(categoria.getId());
+		updateData(newObj, categoria);
+		return repository.save(newObj);
+	}
+
+	private void updateData(Categoria newObj, Categoria obj){
+		newObj.setNome(obj.getNome());
 	}
 
 	public void delete(Integer id){
@@ -42,5 +52,14 @@ public class CategoriaService {
 
 	public List<Categoria> findAll(){
 		return repository.findAll();
+	}
+
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+		return repository.findAll(pageRequest);
+	}
+
+	public Categoria fromDTO(CategoriaDTO dto){
+		return new Categoria(dto.getId(), dto.getNome());
 	}
 }

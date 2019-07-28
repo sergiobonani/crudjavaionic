@@ -65,7 +65,7 @@ public abstract class Pagamento implements Serializable {
 
 	public Pagamento(Integer id, Integer estadoPagamento, Pedido pedido) {
 		this.id = id;
-		this.estadoPagamento = estadoPagamento;
+		this.estadoPagamento = estadoPagamento == null ? null : estadoPagamento;
 		this.pedido = pedido;
 	}
 }
