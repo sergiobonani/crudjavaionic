@@ -58,7 +58,7 @@ public class CrudjavaionicApplication implements CommandLineRunner {
 
 		Produto prod1 = new Produto(null, "Computador", 2000.00);
 		Produto prod2 = new Produto(null, "Impressora", 800.00);
-		Produto prod3 = new Produto(null, "Mouse", 25.00);
+		Produto prod3 = new Produto(null, "Mouse", 80.00);
 		Produto prod4 = new Produto(null, "Mesa de escritório", 250.00);
 		Produto prod5 = new Produto(null, "Toalha", 25.00);
 		Produto prod6 = new Produto(null, "Colcha", 55.00);
